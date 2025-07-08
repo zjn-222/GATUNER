@@ -1,0 +1,24 @@
+源程序修改：
+把源程序的double a=c+b  改成两行
+double program_error=abs(abs(__half2float(s1))-abs(2.666666666666264e+00));   最终结果变量使用double，不参与混合精度
+*s2 =   不要改成Half，不能参与merged   或尽量不使用*S2这种书写形式
+atomicAdd(&__half2float(s1_global), __half2float(val));   引用的变量不要加入混合精度
+！！！修改源码，添加必要的代码至source_program，区分并行版和串行版(simpsons1_并行版.cu   simpsons1_串行版.cu)
+修改绝对误差的值
+
+2.把run.sh的simpsons替换成arclength
+3.把merge.cpp的变量名称列表替换成需要的变量,最终结果变量使用double，不参与混合精度
+4.把GeneticAlgorithm.cpp的初始化种群std::vector<Individual> initializePopulation()中的DNA数量修改individual.chromosome.resize(10)
+5.修改分组编码
+6.修改log路径
+7.修改auto_test1的simpsons
+8.修改初始化种群
+
+记得把loop-convert里面的mytool改成对应的mytool版本！！！！
+记得修改cpp文件，使其全部保持高精度，并且记录运行时间的代码正确。
+
+
+
+
+g++ -std=c++17 GeneticAlgorithm.cpp -o GeneticAlgorithm
+./GeneticAlgorithm
